@@ -3,43 +3,7 @@ package DS.HashMap;
 import java.util.HashMap;
 
 public class ArrayIntersection {
-	
-	public static void intersection1(int[] arr1, int[] arr2){
 		
-		/*
-        if(arr1.length==0 || arr2.length==0)
-            return ;
-        
-            HashMap<Integer,Integer> harr1=new HashMap<>();
-            for(int i=0;i<arr1.length;i++)
-            {   if(harr1.containsKey(arr1[i]))
-                harr1.put(arr1[i],harr1.get(arr1[i])+1);
-             else
-                 harr1.put(arr1[i],1);
-            }
-
-            for(int i=0;i<arr2.length;i++)
-            {
-                if(harr1.containsKey(arr2[i])){
-                    if(harr1.get(arr2[i])!=0){
-
-                    System.out.println(arr2[i]);
-                    harr1.put(arr2[i],harr1.get(arr2[i])-1);
-                    }
-                }
-                else
-                    continue;
-
-
-            }
- */
-		
-		
-		
-            
-	}
-	
-	
 	public static void intersection(int[] arr1, int[] arr2){
 		
         HashMap<Integer,Integer> map=new HashMap<>();
