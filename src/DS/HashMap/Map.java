@@ -50,10 +50,14 @@ public class Map<K,V>{
     		  {
     			  if(head.key.equals(key)) 				  
     			  {
+    				  if(prev!=null) {
     				  prev.next=head.next; // so the previous node of the particular key node will connect to next node.
     				  
     			  }else {
     				  buckets.set(bucketIndex, head.next);
+    			  }
+    				  count--;
+    				  return head.value;
     			  }
     			  prev=head;
     			  head=head.next;
@@ -82,6 +86,44 @@ public class Map<K,V>{
     		  return null;
     		  
     	  }
+    	  private void reHash()
+    	  {
+    		  ArrayList<MapNode<K,V>> temp=buckets; //Old bucket.
+    		  buckets=new ArrayList<>(); // now buckets is pointing to new arraylist
+    		  
+    		  for(int i=0;i<2*numOfBuckets;i++) //as new arraysize is double now we multiple the size by two
+    		  {
+    			  
+    			  buckets.add(null); // initially we have initialise null to all the elements of new array bucket.
+    			  
+    			  
+    		  }
+    		  count=0; // it is going to start the insertion from beginning.
+    		  numOfBuckets=numOfBuckets*2;
+    		  
+    		  //now we will go to each element of old bucket..
+    		  for(int i=0;i<temp.size();i++)
+    		  {
+    			  MapNode<K,V> head=temp.get(i); // getting the head of each element
+    			  while(head!=null) // checking if head is null or there is an value
+    			  {
+    				  K key=head.key;
+    				  V value=head.value;
+    				  insert(key,value);
+    				  head=head.next;
+    				  
+    				  
+    			  }
+    			  
+    		  }
+    		 
+    	  }
+    	  public double loadFactor()
+    	  {
+    		  return (1.0+count)/numOfBuckets;
+    	  }
+    	  
+    	  
     	  //Now we need to insert
     	  
     	  public void insert(K key, V value)
@@ -118,6 +160,12 @@ public class Map<K,V>{
     		  buckets.set(bucketIndex, newNode); // And we have connected the bucket index to need node.
     		  //So first node will be the new which we have inserted.
     		  count++;
+    		  double loadfactor=(1.0+count)/numOfBuckets;
+    		  if(loadfactor>0.2)
+    		  {
+    			  reHash();
+    		  }
+    			  
     		  
     		  
     		  
