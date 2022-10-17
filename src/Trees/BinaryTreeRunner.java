@@ -16,6 +16,41 @@ public class BinaryTreeRunner {
 		 System.out.println("Is Balanced " +isBalanced(root));
 		 
 	}
+	 
+	 public static BalanceTreeReturn isBalancedBetter(BinaryTreeNode<Integer> root)
+	 {
+		if(root==null)
+		{
+			int height=0;
+			boolean isBal=true;
+			BalanceTreeReturn ans=new BalanceTreeReturn();
+			ans.height=height;
+			ans.isBalanced=isBal;
+			return ans;
+			
+		}
+		
+		BalanceTreeReturn leftOutput=isBalancedBetter(root.left);
+		BalanceTreeReturn rightOutput=isBalancedBetter(root.right);
+		
+		boolean isBal=true;
+		int height=1+Math.max(leftOutput.height,rightOutput.height);
+		
+		if(Math.abs(leftOutput.height = rightOutput.height)>1)
+		{
+			isBal=false;
+		}
+		
+		if(!leftOutput.isBalanced || !rightOutput.isBalanced) 
+		{
+			isBal=false;
+		}
+		BalanceTreeReturn ans=new BalanceTreeReturn();
+		ans.height=height;
+		ans.isBalanced=isBal;
+		
+		return ans;
+	 }
 
 	private static BinaryTreeNode<Integer> takeTreeInputBetter(boolean isRootNode, int parentData, boolean isLeftNode) {
 		// TODO Auto-generated method stub
