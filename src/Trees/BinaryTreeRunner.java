@@ -51,6 +51,12 @@ public class BinaryTreeRunner {
 		
 		return ans;
 	 }
+	 
+	 public static BinaryTreeNode<Integer> takeInputLevelWise()
+	 {
+		 
+		 
+	 }
 
 	private static BinaryTreeNode<Integer> takeTreeInputBetter(boolean isRootNode, int parentData, boolean isLeftNode) {
 		// TODO Auto-generated method stub
