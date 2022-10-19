@@ -1,5 +1,7 @@
 package Trees;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 import javax.swing.plaf.synth.SynthOptionPaneUI;
@@ -11,7 +13,7 @@ public class BinaryTreeRunner {
 	
 	 public static void main(String[] args) {
 		
-		 BinaryTreeNode<Integer> root=takeTreeInputBetter(true,0,true);
+		 BinaryTreeNode<Integer> root=takeInputLevelWise();
 		 printDetailTree(root);
 		 System.out.println("Is Balanced " +isBalanced(root));
 		 
@@ -52,9 +54,61 @@ public class BinaryTreeRunner {
 		return ans;
 	 }
 	 
-	 public static BinaryTreeNode<Integer> takeInputLevelWise()
+	 public static void printLevelWise(BinaryTreeNode<Integer> root)
 	 {
 		 
+		 if(root==null)
+		 {
+			 return;
+		 }
+		 
+		 
+	 }
+	 
+	 public static BinaryTreeNode<Integer> takeInputLevelWise()
+	 {
+		 Scanner s=new Scanner(System.in);
+		 
+		 System.out.println("Enter root Data");
+		 int rootData =s.nextInt();
+		 if(rootData==-1)
+		 {
+			 return null;
+		 }
+		 
+		 BinaryTreeNode<Integer> root=new BinaryTreeNode<Integer>(rootData);
+		 
+		 Queue<BinaryTreeNode<Integer>> pendingChildren =new LinkedList<BinaryTreeNode<Integer>>();	 
+		 
+		 pendingChildren.add(root);
+		 
+		 while(!pendingChildren.isEmpty()) {
+			 BinaryTreeNode<Integer> front=pendingChildren.poll();
+			 System.out.println("Enter Left Child of " +front.data);
+			 
+			 int left=s.nextInt();
+			 if(left!=-1)
+			 {
+				 BinaryTreeNode<Integer> rightChild=new BinaryTreeNode<Integer>(left);
+				 root.right=rightChild;
+				 pendingChildren.add(rightChild);
+				 
+			 }
+			 
+			 System.out.println("Enter right child of " + front.data);
+			 
+			 int right=s.nextInt();
+			 if(right!=-1)
+			 {
+				 BinaryTreeNode<Integer> rightChild=new BinaryTreeNode<Integer>(right);
+				 root.right=rightChild;
+				 pendingChildren.add(rightChild);
+				 
+			 }
+			 
+		 }
+		 
+		 return root;
 		 
 	 }
 
