@@ -18,12 +18,30 @@ public class BinaryTreeRunner {
 //		 printDetailTree(root);
 //		 System.out.println("Is Balanced " +isBalanced(root));
 		 
-		 int in[]= {4,2,5,1,3};
-		 int pre[]= {1,2,4,5,3};
+		 int in[]= {1,2,3,4,5,6,7};
+		 int pre[]= {4,2,1,3,6,5,7};
 		 BinaryTreeNode<Integer> root=buildTreeFromPreIn(pre, in);
 		 printDetailTree(root);
+		 System.out.println(searchBST(root,3));
 		 
 	}
+	 
+	 public static boolean searchBST(BinaryTreeNode<Integer> root, int data)
+	 {
+		 if(root==null)
+		 {
+			 return false;
+		 }
+		 if(root.data==data)
+		 {
+			 return true;
+		 }
+		 if(data<root.data)
+		 {
+			 return searchBST(root.left,data);
+		 }
+		 return searchBST(root.right,data);
+	 }
 	 
 	 public static BalanceTreeReturn isBalancedBetter(BinaryTreeNode<Integer> root)
 	 {
