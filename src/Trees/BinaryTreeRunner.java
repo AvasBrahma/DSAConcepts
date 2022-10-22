@@ -12,10 +12,16 @@ public class BinaryTreeRunner {
 	 
 	
 	 public static void main(String[] args) {
-		
-		 BinaryTreeNode<Integer> root=takeInputLevelWise();
+		 
+//		
+//		 BinaryTreeNode<Integer> root=takeInputLevelWise();
+//		 printDetailTree(root);
+//		 System.out.println("Is Balanced " +isBalanced(root));
+		 
+		 int in[]= {4,2,5,1,3};
+		 int pre[]= {1,2,4,5,3};
+		 BinaryTreeNode<Integer> root=buildTreeFromPreIn(pre, in);
 		 printDetailTree(root);
-		 System.out.println("Is Balanced " +isBalanced(root));
 		 
 	}
 	 
@@ -110,6 +116,68 @@ public class BinaryTreeRunner {
 		 
 		 return root;
 		 
+	 }
+	 
+	 public static BinaryTreeNode<Integer> buildTreeFromPreInHelper(int [] pre, int [] in, int siPre, int eiPre, int siIn, int eiIn){
+		 
+		 if(siPre>eiPre)
+		 {
+			 return null;
+		 }
+		 int rootData=pre[siPre];
+		 
+		 BinaryTreeNode<Integer> root=new BinaryTreeNode<Integer>(rootData);
+		 
+		 int rootIndex=-1;
+		 for(int i=siIn; i<=eiIn;i++) //To Find Root node in InOrder
+		 {
+			 if(in[i]==rootData)
+			 {
+				 rootIndex=i;
+				 break;
+				 
+			 }
+		 }
+		 
+		 int siPreLeft=siPre+1; //Second index of preOrder will be first left
+		 int siInLeft=siIn; 
+		 int eiPreLeft;
+		 int eiInLeft=rootIndex-1;
+		 //Above variables to build left sub tree
+		//Below variables to build right sub tree
+		 int siPreRight;
+		 int siInRight=rootIndex+1;
+		 int eiPreRight=eiPre;
+		 int eiInRight=eiIn;
+		 
+		 //Remaining two we need to find..
+		 
+		 int leftsubtreeLength=eiInLeft-siInLeft+1;
+		 eiPreLeft=siPreLeft+leftsubtreeLength-1;
+		 siPreRight=eiPreLeft+1;
+		 
+		 
+		 BinaryTreeNode<Integer> left = buildTreeFromPreInHelper(pre,in, siPreLeft, eiPreLeft, siInLeft, eiInLeft);
+		 
+		 BinaryTreeNode<Integer> right=buildTreeFromPreInHelper(pre,in, siPreRight, eiPreRight, siInRight, eiInRight);
+		 
+		 root.left=left;
+		 root.right=right;
+		 
+		 return root;
+		 
+		 
+		 
+	 }
+	 public static BinaryTreeNode<Integer> buildTreeFromPreIn(int pre[], int in[]){
+		 
+		 
+		 
+		 
+		 BinaryTreeNode<Integer> root=buildTreeFromPreInHelper(pre,in,0,pre.length-1,0,in.length-1);
+		 
+		 
+		 return root;
 	 }
 
 	private static BinaryTreeNode<Integer> takeTreeInputBetter(boolean isRootNode, int parentData, boolean isLeftNode) {
