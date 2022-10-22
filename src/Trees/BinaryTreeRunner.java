@@ -43,6 +43,31 @@ public class BinaryTreeRunner {
 		 return searchBST(root.right,data);
 	 }
 	 
+	 public static void printBetweenK1K2(BinaryTreeNode<Integer> root, int k1, int k2)
+	 {
+		 if(root==null)
+		 {
+			 return;
+		 }
+		 //there are three different cases
+		 if(root.data<k1)
+		 {
+			 System.out.println(root.data);
+			 printBetweenK1K2(root.right,k1,k2);
+		 } else if(root.data>k2)
+		 {
+			 System.out.println(root.data);
+			 printBetweenK1K2(root.left,k1,k2);
+			 
+		 }else {
+			 System.out.println(root.data);
+			 printBetweenK1K2(root.left,k1,k2);
+			 printBetweenK1K2(root.right,k1,k2);
+			 
+		 }
+		 
+	 }
+	 
 	 public static BalanceTreeReturn isBalancedBetter(BinaryTreeNode<Integer> root)
 	 {
 		if(root==null)
