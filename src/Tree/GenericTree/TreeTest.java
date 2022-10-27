@@ -9,8 +9,13 @@ public class TreeTest {
 			return;
 		}
 		
-		System.out.print(root.data + "  "); // print yrself (root)
+		System.out.print(root.data + ": "); // print yrself (root)
 		
+		for(int i=0;i<root.children.size();i++)
+		{
+			System.out.print(root.children.get(i).data+ " ");
+		}
+		System.out.println();
 		//how it will call to each sub trees one by one now 
 		for(int i=0;i<root.children.size();i++)  //4 has 2,3,1 
 		{
