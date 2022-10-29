@@ -2,6 +2,17 @@ package Tree.GenericTree;
 
 public class TreeTest {
 	
+	public static int numberOfNodes(TreeNode<Integer> root)
+	{
+		int count=1;
+		for(int i=0;i<root.children.size();i++)
+		{
+			int childCount=numberOfNodes(root.children.get(i));
+			count+=childCount;
+		}
+		return count;
+	}
+	
 	public static void printTree(TreeNode<Integer> root) {
 		
 		
@@ -46,6 +57,7 @@ public class TreeTest {
 		
 		printTree(root);
 		
+		System.out.println("Number of Nodes : "+numberOfNodes(root));
 		
 		
 	}
